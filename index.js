@@ -1,5 +1,5 @@
 const express = require('express')
-const post = require('./post.js')
+const posts = require('./posts.js')
 const app = express()
 const port = 3000
 
@@ -10,7 +10,11 @@ app.get('/', (req, res) => {
 })
 
 app.get('/bacheca', (req, res) => {
-    res.json(post)
+    console.log(req.query.limit);
+    res.json({
+        result: posts.slice(0,req.query.limit),
+        count: posts.length,
+    })
 })
 
 app.listen(port, () => {
